@@ -1,2 +1,2 @@
-# Predictive_Satisficing_Framework
-This repository contains files necessary to exhibit the structure of our proposed predictive satisficing framework.
+# Predictive Satisficing Output Structure
+This repository contains the detailed JSON output schema for our proposed framework.
