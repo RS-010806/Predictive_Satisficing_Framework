@@ -1,107 +1,60 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/predictive-satisficing-output.schema.json",
-  "title": "Predictive Satisficing Framework – Output",
+  "$schema": "https://json-schema.org/draft/2020-12/schema", 
+  "$id": "https://example.org/psf-output.schema.json",
+  "title": "Predictive Satisficing Framework Output",
   "type": "object",
-  "required": [
-    "schema_version",
-    "timestamp",
-    "satisficing_configurations",
-    "processing_metadata"
-  ],
+  "required": ["schema_version","timestamp",
+               "satisficing_configurations","processing_metadata"],
   "properties": {
-    "schema_version": {
-      "type": "string",
-      "const": "1.0"
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    },
+    "schema_version": { "type": "string", "const": "1.0" },
+    "timestamp":      { "type": "string", "format": "date-time" },
+
     "satisficing_configurations": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": [
-          "config_id",
-          "allocation",
-          "metrics",
-          "traceability"
-        ],
+        "required": ["config_id","allocation",
+                     "metrics","traceability"],
         "properties": {
-          "config_id": {
-            "type": "string",
-            "pattern": "^[A-Z0-9_-]+$"
-          },
+          "config_id": { "type": "string", "pattern": "^[A-Z0-9_-]+$" },
+
           "allocation": {
             "type": "object",
-            "additionalProperties": {
-              "type": "integer",
-              "minimum": 0
-            }
+            "description": "Resource distribution; keys defined by designer",
+            "additionalProperties": { "type": "integer", "minimum": 0 }
           },
+
           "metrics": {
             "type": "object",
-            "required": [
-              "total_cost_usd",
-              "average_wait_minutes"
-            ],
+            "required": ["total_cost_usd","average_wait_minutes"],
             "properties": {
-              "total_cost_usd": {
-                "type": "number",
-                "minimum": 0
-              },
-              "average_wait_minutes": {
-                "type": "number",
-                "minimum": 0
-              },
+              "total_cost_usd":       { "type": "number", "minimum": 0 },
+              "average_wait_minutes": { "type": "number", "minimum": 0 },
               "coverage_percent": {
                 "type": "object",
-                "additionalProperties": {
-                  "type": "number",
-                  "minimum": 0,
-                  "maximum": 1000
-                }
+                "additionalProperties": { "type": "number",
+                                           "minimum": 0, "maximum": 1000 }
               }
             }
           },
+
           "traceability": {
             "type": "object",
-            "required": [
-              "thresholds_passed",
-              "fallback_actions"
-            ],
+            "required": ["thresholds_passed","fallback_actions"],
             "properties": {
-              "thresholds_passed": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "criteria_failed": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
+              "thresholds_passed": { "type": "array",
+                                     "items": { "type": "string" } },
+              "criteria_failed":   { "type": "array",
+                                     "items": { "type": "string" } },
               "fallback_actions": {
                 "type": "array",
                 "items": {
                   "type": "object",
-                  "required": [
-                    "target",
-                    "action"
-                  ],
+                  "required": ["target","action"],
                   "properties": {
-                    "target": {
-                      "type": "string"
-                    },
-                    "action": {
-                      "type": "string"
-                    },
-                    "details": {
-                      "type": "string"
-                    }
+                    "target":  { "type": "string" },
+                    "action":  { "type": "string" },
+                    "details": { "type": "string" }
                   }
                 }
               }
@@ -110,46 +63,26 @@
         }
       }
     },
+
     "processing_metadata": {
       "type": "object",
-      "required": [
-        "input_quality",
-        "fallback_used",
-        "processing_duration_ms",
-        "requirements_satisfied"
-      ],
+      "required": ["input_quality","fallback_used",
+                   "processing_duration_ms","requirements_satisfied"],
       "properties": {
-        "input_quality": {
-          "type": "string",
-          "enum": [
-            "complete",
-            "partial",
-            "degraded"
-          ]
-        },
-        "fallback_used": {
-          "type": "boolean"
-        },
-        "processing_duration_ms": {
-          "type": "integer",
-          "minimum": 0
-        },
+        "input_quality": { "type": "string",
+                           "enum": ["complete","partial","degraded"] },
+        "fallback_used": { "type": "boolean" },
+        "processing_duration_ms": { "type": "integer", "minimum": 0 },
         "requirements_satisfied": {
           "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "F1",
-              "S1",
-              "R1",
-              "I1",
-              "L1",
-              "E1"
-            ]
-          }
+          "items": { "type": "string",
+                     "enum": ["F1","S1","R1","I1","L1","E1"] }
         }
       }
     }
   },
   "additionalProperties": false
 }
+
+
+
